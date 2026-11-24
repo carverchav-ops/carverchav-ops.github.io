@@ -1,0 +1,114 @@
+body{
+  margin:0;padding:0;
+  font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:13px;color:#333;
+  background-color:#d9dde3;
+  background-image:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 2px,transparent 2px 6px),
+    linear-gradient(#c3cad4,#e6e9ee 400px);
+}
+a{color:#1a5fb4;text-decoration:none}
+a:hover{text-decoration:underline;color:#c0392b}
+
+#container{width:960px;max-width:100%;margin:24px auto;background:#fff;border:1px solid #9aa4b1;
+  box-shadow:0 0 12px rgba(0,0,0,.25);border-radius:6px;overflow:hidden}
+
+/* header */
+#header{height:120px;position:relative;
+  background:linear-gradient(#3b6fa8 0%,#2a5585 50%,#1f4673 51%,#2b5c92 100%);
+  border-bottom:4px solid #f2a71b}
+#header h1{margin:0;position:absolute;left:28px;top:24px;
+  font-family:"Trebuchet MS",Arial,sans-serif;font-size:42px;color:#fff;letter-spacing:-1px;
+  text-shadow:0 2px 2px rgba(0,0,0,.45)}
+#header h1 a{color:#fff;text-decoration:none}
+#header h1 span{color:#ffcc4d}
+#header .slogan{position:absolute;left:32px;top:78px;color:#cfe0f5;font-style:italic;font-family:Georgia,serif;font-size:14px}
+#header .badge{position:absolute;right:28px;top:30px;width:150px;padding:8px;text-align:center;
+  background:linear-gradient(#fff6d5,#ffe58a);border:1px solid #d9a400;border-radius:8px;
+  font-family:"Trebuchet MS",Arial,sans-serif;font-size:12px;color:#7a5600;font-weight:bold;
+  transform:rotate(4deg);box-shadow:2px 3px 6px rgba(0,0,0,.35)}
+
+/* nav */
+#nav{background:linear-gradient(#fafafa,#dfe3e8);border-bottom:1px solid #b5bdc7;padding:0 18px;height:36px}
+#nav ul{list-style:none;margin:0;padding:0}
+#nav li{float:left}
+#nav a{display:block;line-height:36px;padding:0 16px;color:#2a3b4f;font-weight:bold;
+  font-family:"Trebuchet MS",Arial,sans-serif;font-size:13px;border-right:1px solid #c9d0d8;
+  text-shadow:0 1px 0 #fff}
+#nav a:hover,#nav a.on{background:linear-gradient(#fff,#cfd8e3);color:#1a5fb4;text-decoration:none}
+
+/* layout */
+#content{overflow:hidden;padding:20px}
+#main{float:left;width:640px}
+#sidebar{float:right;width:260px}
+
+.box{border:1px solid #c5ccd5;border-radius:5px;margin-bottom:20px;background:#fff}
+.box h2{margin:0;padding:8px 12px;font-family:"Trebuchet MS",Arial,sans-serif;font-size:16px;color:#fff;
+  background:linear-gradient(#5a8cc4,#3a6aa1);border-radius:4px 4px 0 0;text-shadow:0 1px 1px rgba(0,0,0,.4)}
+.box h2.orange{background:linear-gradient(#f7b840,#e08c0b)}
+.box h2.steel{background:linear-gradient(#8f99a6,#5b6573)}
+.box .inner{padding:14px;line-height:1.6}
+.box p{margin:0 0 12px}
+.box p:last-child{margin-bottom:0}
+
+.welcome{background:#fffbe6;border:1px dashed #e2c35a;padding:10px 14px;margin-bottom:20px;border-radius:4px;font-size:12px}
+.welcome b{color:#b36b00}
+
+.new{display:inline-block;margin-left:6px;padding:1px 6px;font:bold 10px Verdana,sans-serif;color:#fff;
+  background:linear-gradient(#ff6b5b,#d62d1c);border-radius:3px;vertical-align:2px;text-shadow:none}
+
+/* plugin boxes: picture on the left, text in its own column */
+.plugin{overflow:hidden}
+.plugin .shot{float:left;width:200px;height:130px;border:1px solid #888;border-radius:4px;
+  background:linear-gradient(#4a4f58,#23262c);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),2px 2px 4px rgba(0,0,0,.3);
+  position:relative;color:#ddd;font:bold 11px Arial,sans-serif;text-align:center}
+.plugin .shot.metal{background:linear-gradient(#e4e7eb 0%,#b9bfc7 45%,#9aa1aa 55%,#cfd4da 100%);border-color:#6b727c}
+.plugin .shot .lbl{padding-top:8px;letter-spacing:3px;color:#ffcc4d}
+.plugin .shot.metal .lbl{color:#2f3640;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.plugin .knobs{position:absolute;bottom:16px;left:0;right:0;display:flex;justify-content:space-around}
+.plugin .k{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8a909a,#2b2e34 70%);
+  border:1px solid #111;position:relative}
+.plugin .k:after{content:"";position:absolute;left:17px;top:4px;width:3px;height:11px;background:#ffcc4d}
+.plugin .shot.metal .k:after{background:#ff5a3c}
+.plugin .grains{position:absolute;left:12px;right:12px;top:30px;height:30px;
+  background:repeating-linear-gradient(90deg,#2f3640 0 2px,transparent 2px 5px,#2f3640 5px 6px,transparent 6px 11px);
+  opacity:.55;border-radius:2px}
+.plugin .desc{margin-left:216px}
+.plugin .desc ul{margin:6px 0 12px;padding-left:18px}
+.plugin .desc li{margin-bottom:4px}
+.status{font-size:11px;color:#777;margin-bottom:8px}
+.status b{color:#2e7d32}
+
+.btn{display:inline-block;padding:6px 14px;border:1px solid #2c5d93;border-radius:4px;color:#fff !important;font-weight:bold;
+  font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(#6ea2dc,#2f68a6);
+  text-shadow:0 -1px 0 rgba(0,0,0,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.btn:hover{background:linear-gradient(#80b2ea,#3b78ba);text-decoration:none}
+
+/* sidebar */
+.avatar{width:96px;height:96px;float:left;margin:0 10px 6px 0;border:3px solid #fff;outline:1px solid #aaa;
+  background:linear-gradient(135deg,#3b6fa8,#f2a71b);color:#fff;font:bold 44px Georgia,serif;text-align:center;line-height:96px}
+.side-list{list-style:none;margin:0;padding:0}
+.side-list li{padding:6px 0 6px 18px;border-bottom:1px dotted #ccc;
+  background:no-repeat 2px 11px linear-gradient(#f2a71b,#f2a71b);background-size:6px 6px}
+.side-list li:last-child{border-bottom:none}
+.tags span{display:inline-block;margin:0 4px 6px 0;padding:2px 7px;background:#eef3f9;border:1px solid #c9d6e6;border-radius:10px;font-size:11px}
+.tags .big{font-size:14px;font-weight:bold}
+
+.contact-big{font-size:15px}
+.contact-big li{padding:10px 0 10px 18px;background-position:2px 17px}
+
+/* footer */
+#footer{clear:both;background:linear-gradient(#e9ecf0,#d3d9e0);border-top:1px solid #b5bdc7;
+  padding:12px 20px;text-align:center;font-size:11px;color:#555}
+#footer a{margin:0 6px}
+
+@media (max-width:980px){
+  #container{margin:0;border-radius:0}
+  #main,#sidebar{float:none;width:auto}
+  #header .badge{display:none}
+}
+@media (max-width:600px){
+  .plugin .shot{float:none;margin:0 auto 12px}
+  .plugin .desc{margin-left:0}
+  #nav{height:auto;overflow:hidden;padding:0}
+  #nav a{padding:0 10px}
+}
