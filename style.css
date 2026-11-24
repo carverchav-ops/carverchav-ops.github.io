@@ -133,8 +133,8 @@ a:hover{text-decoration:underline;color:#c0392b}
 .plugin img.shot{display:block;object-fit:cover;background:#222}
 
 /* pixel cat (inline SVG, 15 frames at 100ms like the original GIF) */
-.cat{text-align:right;margin-top:40px;line-height:0}
-.cat svg{display:inline-block;max-width:100%;height:auto}
+.cat{text-align:center;margin-top:8px;line-height:0}
+.cat svg{display:inline-block;width:100%;max-width:260px;height:auto}
 .cat .a{fill:#16181e}.cat .b{fill:#4a4d55}.cat .c{fill:#8a8d94}
 .cat .f{visibility:hidden;animation:catframe 1.5s step-end infinite}
 @keyframes catframe{0%{visibility:visible}6.6667%{visibility:hidden}100%{visibility:hidden}}
