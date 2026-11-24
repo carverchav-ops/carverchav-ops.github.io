@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDIT: your name -->
+<title>Your Name — Audio & Software Developer</title>
+<meta name="description" content="Developer portfolio: free VST audio plugins in C++/JUCE, DSP, and software projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0d10; --panel:#14161b; --panel2:#1b1e25; --line:#262a33;
+    --text:#e8e6e1; --muted:#8b909c; --accent:#ffb547; --accent2:#5ee6c4;
+    --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Space Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(12,13,16,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-family:var(--mono);font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px}
+  .led{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2);animation:pulse 2.4s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+  nav ul{display:flex;gap:28px;list-style:none;font-family:var(--mono);font-size:13px;color:var(--muted)}
+  nav ul a:hover{color:var(--accent)}
+
+  /* hero */
+  .hero{position:relative;padding:96px 0 72px;overflow:hidden}
+  #scope{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+  .hero .wrap{position:relative}
+  .tag{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  h1{font-size:clamp(44px,8vw,92px);line-height:.98;font-weight:700;letter-spacing:-.03em;margin:18px 0 24px}
+  h1 span{color:var(--accent)}
+  .lede{max-width:600px;font-size:19px;color:#c4c2bd}
+  .cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .btn{font-family:var(--mono);font-size:14px;padding:13px 22px;border-radius:6px;border:1px solid var(--line);transition:.15s}
+  .btn.primary{background:var(--accent);color:#111;border-color:var(--accent);font-weight:600}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,181,71,.25)}
+  .btn:not(.primary):hover{border-color:var(--accent);color:var(--accent)}
+
+  /* meters row */
+  .meters{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:64px}
+  .meter{background:var(--panel);padding:20px 22px}
+  .meter b{display:block;font-size:30px;font-weight:700}
+  .meter small{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+  section{padding:96px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px}
+  .sec-head .num{font-family:var(--mono);color:var(--accent);font-size:14px}
+  h2{font-size:clamp(30px,4vw,44px);letter-spacing:-.02em}
+
+  /* about */
+  .about{display:grid;grid-template-columns:1.4fr 1fr;gap:56px}
+  .about p{color:#c4c2bd;margin-bottom:16px;font-size:17px}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .chip{font-family:var(--mono);font-size:12.5px;padding:7px 12px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:#cfcdc8}
+  .chip.hot{border-color:rgba(255,181,71,.5);color:var(--accent)}
+
+  /* featured plugin */
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .faceplate{background:linear-gradient(160deg,#22252d,#16181d);padding:40px;display:flex;flex-direction:column;justify-content:center;gap:28px;border-right:1px solid var(--line)}
+  .faceplate .pname{font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--muted);text-align:center}
+  .knobs{display:flex;justify-content:space-around}
+  .knob{display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .dial{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3e48,#1a1c22 70%);border:1px solid #33373f;position:relative;box-shadow:0 6px 16px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);cursor:grab}
+  .dial::after{content:"";position:absolute;left:50%;top:8px;width:3px;height:18px;margin-left:-1.5px;border-radius:2px;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+  #voices{width:100%;height:110px;background:#0e0f13;border:1px solid var(--line);border-radius:8px}
+  .feature-body{padding:44px}
+  .feature-body .tag{color:var(--accent2)}
+  .feature-body h3{font-size:32px;margin:10px 0 16px;letter-spacing:-.02em}
+  .feature-body p{color:#c4c2bd;margin-bottom:18px}
+  .feature-body ul{list-style:none;margin:22px 0 28px}
+  .feature-body li{padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px;display:flex;gap:12px}
+  .feature-body li::before{content:"→";color:var(--accent);font-family:var(--mono)}
+
+  /* projects */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px;display:flex;flex-direction:column;transition:.2s}
+  .card:hover{border-color:#3a3f4a;transform:translateY(-3px)}
+  .card .kind{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .card h4{font-size:21px;margin:10px 0 10px}
+  .card p{color:#a9a7a2;font-size:15px;flex:1}
+  .card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px}
+  .card .tags span{font-family:var(--mono);font-size:11px;color:var(--accent2)}
+  .card .links{margin-top:16px;font-family:var(--mono);font-size:13px;display:flex;gap:16px}
+  .card .links a{color:var(--accent)}
+  .card .links a:hover{text-decoration:underline}
+
+  /* timeline */
+  .timeline{border-left:1px solid var(--line);margin-left:6px}
+  .item{position:relative;padding:0 0 44px 34px}
+  .item::before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .item .when{font-family:var(--mono);font-size:13px;color:var(--accent)}
+  .item h4{font-size:21px;margin:4px 0}
+  .item .where{color:var(--muted);font-size:15px;margin-bottom:10px}
+  .item p{color:#c4c2bd;max-width:680px}
+
+  /* contact */
+  .contact{text-align:center;padding:120px 0}
+  .contact h2{font-size:clamp(36px,6vw,64px);margin-bottom:18px}
+  .contact p{color:var(--muted);margin-bottom:34px}
+  .socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+  footer{border-top:1px solid var(--line);padding:28px 0;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  footer .wrap{display:flex;justify-content:space-between}
+
+  @media (max-width:860px){
+    nav ul{display:none}
+    .meters{grid-template-columns:repeat(2,1fr)}
+    .about,.feature{grid-template-columns:1fr}
+    .faceplate{border-right:none;border-bottom:1px solid var(--line)}
+    .grid{grid-template-columns:1fr}
+    footer .wrap{flex-direction:column;gap:8px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <!-- EDIT: your name or handle -->
+    <a href="#" class="logo"><span class="led"></span>yourname.dev</a>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#plugins">plugins</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="scope"></canvas>
+  <div class="wrap">
+    <div class="tag">// audio dsp · c++ · juce</div>
+    <!-- EDIT: your name -->
+    <h1>Hi, I'm Your Name.<br>I build <span>sound</span> in code.</h1>
+    <p class="lede">I'm a developer who makes free VST audio plugins in C++ and JUCE, and builds software along the way. Here are my plugins, my projects, and what I've worked on.</p>
+    <div class="cta">
+      <a href="#plugins" class="btn primary">See my plugins ↓</a>
+      <!-- EDIT: GitHub link -->
+      <a href="https://github.com/" class="btn" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+
+    <div class="meters">
+      <div class="meter"><b>3+ yrs</b><small>building audio plugins</small></div>
+      <!-- EDIT: replace with real numbers -->
+      <div class="meter"><b>00</b><small>plugins released</small></div>
+      <div class="meter"><b>00k</b><small>downloads</small></div>
+      <div class="meter"><b>C++</b><small>primary language</small></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>About</h2></div>
+    <div class="about">
+      <div>
+        <p>For about three years I've been building free VST plugins with a community of developers on Discord. That's where I learned JUCE, and it's where I got serious about DSP, real-time audio, and shipping software that other people actually use.</p>
+        <p>I also make music, so I come at plugins from both sides: what the math is doing, and what a producer needs to hear.</p>
+        <!-- EDIT: add a sentence about what you're looking for (internships, collaborations, freelance work) -->
+        <p>I'm open to collaborations, internships, and interesting audio or software projects.</p>
+      </div>
+      <div class="stack">
+        <span class="chip hot">C++</span><span class="chip hot">JUCE</span><span class="chip hot">DSP</span>
+        <span class="chip">VST3 / AU</span><span class="chip">Real-time audio</span><span class="chip">Git</span>
+        <span class="chip">CMake</span><span class="chip">Filters & modulation</span>
+        <!-- EDIT: add or remove skills -->
+        <span class="chip">Python</span><span class="chip">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plugins">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>Featured plugin</h2></div>
+    <div class="feature">
+      <div class="faceplate">
+        <!-- EDIT: plugin name -->
+        <div class="pname">CHORUS · v1.0</div>
+        <canvas id="voices"></canvas>
+        <div class="knobs">
+          <div class="knob"><div class="dial" style="transform:rotate(-40deg)"></div>Voices</div>
+          <div class="knob"><div class="dial" style="transform:rotate(25deg)"></div>Drift</div>
+          <div class="knob"><div class="dial" style="transform:rotate(70deg)"></div>Mix</div>
+        </div>
+      </div>
+      <div class="feature-body">
+        <div class="tag">lead developer</div>
+        <!-- EDIT: plugin name -->
+        <h3>A chorus without an LFO</h3>
+        <p>Most chorus plugins wobble a delay line with a low-frequency oscillator. I led a plugin built on a different idea: get the thickness from the way several voices interact, like a group of tape machines running slightly out of sync.</p>
+        <ul>
+          <li>Phase interactions between voices instead of one periodic sweep</li>
+          <li>Micro-pitch shifting for detune that moves naturally</li>
+          <li>Tape-style multi-voice modeling</li>
+        </ul>
+        <div class="cta" style="margin-top:0">
+          <!-- EDIT: download + source links -->
+          <a href="#" class="btn primary">Download (free)</a>
+          <a href="#" class="btn">Source ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2>Projects</h2></div>
+    <!-- EDIT: replace these placeholder cards with your real projects. Copy a <div class="card"> block to add more. -->
+    <div class="grid">
+      <div class="card">
+        <div class="kind">Audio plugin</div>
+        <h4>Plugin name</h4>
+        <p>One or two sentences on what it does and what was interesting to build.</p>
+        <div class="tags"><span>C++</span><span>JUCE</span><span>DSP</span></div>
+        <div class="links"><a href="#">Download</a><a href="#">Code</a></div>
+      </div>
+      <div class="card">
+        <div class="kind">Audio plugin</div>
+        <h4>Plugin name</h4>
+        <p>One or two sentences on what it does and what was interesting to build.</p>
+        <div class="tags"><span>C++</span><span>JUCE</span></div>
+        <div class="links"><a href="#">Download</a><a href="#">Code</a></div>
+      </div>
+      <div class="card">
+        <div class="kind">Software</div>
+        <h4>Project name</h4>
+        <p>A non-audio project, such as a tool, an app, or a script you're proud of.</p>
+        <div class="tags"><span>Python</span></div>
+        <div class="links"><a href="#">Live</a><a href="#">Code</a></div>
+      </div>
+      <div class="card">
+        <div class="kind">Software</div>
+        <h4>Project name</h4>
+        <p>One or two sentences on what it does and what was interesting to build.</p>
+        <div class="tags"><span>JavaScript</span></div>
+        <div class="links"><a href="#">Live</a><a href="#">Code</a></div>
+      </div>
+      <div class="card">
+        <div class="kind">Open source</div>
+        <h4>Contribution</h4>
+        <p>A library or community project you contributed to, and what you added.</p>
+        <div class="tags"><span>C++</span></div>
+        <div class="links"><a href="#">PR</a></div>
+      </div>
+      <div class="card">
+        <div class="kind">Experiment</div>
+        <h4>Project name</h4>
+        <p>Something small or weird you built to learn. These are often the most interesting cards.</p>
+        <div class="tags"><span>DSP</span></div>
+        <div class="links"><a href="#">Demo</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2>Experience</h2></div>
+    <div class="timeline">
+      <div class="item">
+        <div class="when">2023 — present</div>
+        <h4>Plugin Developer</h4>
+        <!-- EDIT: community name -->
+        <div class="where">Open-source VST developer community (Discord)</div>
+        <p>Build free VST plugins in C++ with JUCE alongside other developers. Led development of a chorus plugin based on my own design: multi-voice phase interaction and micro-pitch shifting instead of an LFO.</p>
+      </div>
+      <!-- EDIT: add more roles, jobs, competitions, or courses by copying this block -->
+      <div class="item">
+        <div class="when">Year — Year</div>
+        <h4>Role or achievement</h4>
+        <div class="where">Organization</div>
+        <p>What you did and what came of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="tag">// let's talk</div>
+    <h2>Get in touch</h2>
+    <p>Want to collaborate, report a bug, or just talk about plugins? Send me an email.</p>
+    <div class="socials">
+      <!-- EDIT: your email and links -->
+      <a href="mailto:you@example.com" class="btn primary">you@example.com</a>
+      <a href="https://github.com/" class="btn" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" class="btn">Discord</a>
+      <a href="#" class="btn">SoundCloud</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Your Name</span>
+    <span>built by hand · no frameworks</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function fit(c){const r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return [x,r.width,r.height];}
+
+// Hero oscilloscope
+const scope=document.getElementById('scope');
+let [sx,sw,sh]=fit(scope);
+addEventListener('resize',()=>{[sx,sw,sh]=fit(scope);[vx,vw,vh]=fit(voices);});
+function drawScope(t){
+  sx.clearRect(0,0,sw,sh);
+  const lines=[['rgba(255,181,71,.55)',1,0],['rgba(94,230,196,.35)',1.5,2],['rgba(255,255,255,.08)',.7,4]];
+  lines.forEach(([col,f,ph])=>{
+    sx.beginPath();sx.strokeStyle=col;sx.lineWidth=1.5;
+    for(let x=0;x<=sw;x+=3){
+      const n=x/sw;
+      const y=sh*.62+Math.sin(n*12*f+t*.0012+ph)*38*Math.sin(n*Math.PI)
+             +Math.sin(n*31*f-t*.0021+ph)*12*Math.sin(n*Math.PI);
+      x?sx.lineTo(x,y):sx.moveTo(x,y);
+    }
+    sx.stroke();
+  });
+}
+
+// Chorus voices display
+const voices=document.getElementById('voices');
+let [vx,vw,vh]=fit(voices);
+const cols=['#ffb547','#5ee6c4','#e8e6e1','#ff7a59'];
+function drawVoices(t){
+  vx.clearRect(0,0,vw,vh);
+  cols.forEach((c,i)=>{
+    vx.beginPath();vx.strokeStyle=c;vx.globalAlpha=.7;vx.lineWidth=1.3;
+    const drift=Math.sin(t*.0004*(i+1)+i)*.35+Math.sin(t*.00017*(i+2))*.2;
+    for(let x=0;x<=vw;x+=2){
+      const y=vh/2+Math.sin(x*.045*(1+drift*.02)+t*.003+i*1.7+drift)*vh*.28;
+      x?vx.lineTo(x,y):vx.moveTo(x,y);
+    }
+    vx.stroke();
+  });
+  vx.globalAlpha=1;
+}
+
+function loop(t){drawScope(t);drawVoices(t);if(!reduce)requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+
+// Draggable knobs (just for fun)
+document.querySelectorAll('.dial').forEach(d=>{
+  let ang=parseFloat(d.style.transform.match(/-?\d+/))||0,y0,a0;
+  d.addEventListener('pointerdown',e=>{y0=e.clientY;a0=ang;d.setPointerCapture(e.pointerId);d.style.cursor='grabbing';});
+  d.addEventListener('pointermove',e=>{if(y0==null)return;ang=Math.max(-135,Math.min(135,a0+(y0-e.clientY)*1.5));d.style.transform=`rotate(${ang}deg)`;});
+  d.addEventListener('pointerup',()=>{y0=null;d.style.cursor='grab';});
+});
+</script>
+</body>
+</html>
