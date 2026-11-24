@@ -139,3 +139,42 @@ a:hover{text-decoration:underline;color:#c0392b}
 .cat .f{visibility:hidden;animation:catframe 1.5s step-end infinite}
 @keyframes catframe{0%{visibility:visible}6.6667%{visibility:hidden}100%{visibility:hidden}}
 @media (prefers-reduced-motion:reduce){.cat .f{animation:none}.cat .f:first-child{visibility:visible}}
+
+/* ===== dark mode (toggled by the button in the menu) ===== */
+html.dark{color-scheme:dark}
+html.dark body{color:#d3d6dc;background-color:#0f1115;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 2px,transparent 2px 6px),
+    linear-gradient(#1a1e25,#0f1115 400px)}
+html.dark a{color:#6fb1ff}
+html.dark a:hover{color:#ffcc4d}
+html.dark #container{background:#1b1e24;border:1px solid #333944;box-shadow:0 0 18px rgba(0,0,0,.7)}
+html.dark #header{background:linear-gradient(#2a3f5c 0%,#1c2c44 50%,#14223a 51%,#1b2d4a 100%)}
+html.dark #header .slogan{color:#9fb6d3}
+html.dark #nav{background:linear-gradient(#2c313a,#1f232a);border-bottom:1px solid #0c0e11}
+html.dark #nav a{color:#c4cad3;border-right:1px solid #383e48;text-shadow:0 -1px 0 #000}
+html.dark #nav a:hover,html.dark #nav a.on{background:linear-gradient(#3a414d,#262b33);color:#ffcc4d}
+html.dark .box{border:1px solid #343a45;background:#22262d;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+html.dark .box h2{background:linear-gradient(#3a5f8f,#24426a)}
+html.dark .box h2.orange{background:linear-gradient(#c98a1a,#8f5d08)}
+html.dark .box h2.steel{background:linear-gradient(#5d6673,#3a414c)}
+html.dark .welcome{background:#2a2617;border:1px dashed #7a6626}
+html.dark .welcome b{color:#ffcc4d}
+html.dark .plugin .shot{border:1px solid #111}
+html.dark .status{color:#8a909a}
+html.dark .status b{color:#6ee07a}
+html.dark .btn{border:1px solid #142a47;background:linear-gradient(#4a82c4,#22508a);text-shadow:0 -1px 0 rgba(0,0,0,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+html.dark .btn:hover{background:linear-gradient(#5b93d6,#2b5f9e)}
+html.dark .avatar{border:3px solid #3a404b;outline:1px solid #0c0e11;box-shadow:1px 2px 6px rgba(0,0,0,.5)}
+html.dark .side-list li{border-bottom:1px dotted #444b57}
+html.dark .tags span{background:#2b3340;border:1px solid #3e4a5c;color:#cfd7e3}
+html.dark #footer{background:linear-gradient(#20242b,#16191e);border-top:1px solid #333944;color:#8a909a}
+html.dark .cat .a{fill:#050608}
+html.dark .cat .b{fill:#5a5e67}
+html.dark .cat .c{fill:#a3a7af}
+
+/* theme toggle button */
+#nav .toggle{float:right;margin-top:6px;padding:3px 10px;cursor:pointer;
+  font:bold 12px "Trebuchet MS",Arial,sans-serif;color:#2a3b4f;border:1px solid #9aa4b1;border-radius:12px;
+  background:linear-gradient(#fff,#d6dce4);box-shadow:inset 0 1px 0 #fff}
+#nav .toggle:hover{border-color:#6f7d8f}
+html.dark #nav .toggle{color:#ffcc4d;border-color:#0c0e11;background:linear-gradient(#3a414d,#22262d);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+@media (max-width:600px){#nav .toggle{margin:6px 8px}}

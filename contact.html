@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact :: carver.click</title>
 <meta name="description" content="Carver's homepage: free VST audio plugins in C++/JUCE.">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=9">
+<script>
+  // dark mode is the default; remember the visitor's choice across pages
+  (function(){var t='dark';try{t=localStorage.getItem('theme')||'dark'}catch(e){}
+  if(t==='dark')document.documentElement.className+=' dark';})();
+</script>
+
 </head>
 <body>
 <div id="container">
@@ -23,6 +29,7 @@
       <li><a href="plugins.html">Plugins</a></li>
       <li><a href="contact.html" class="on">Contact</a></li>
     </ul>
+    <button class="toggle" id="themeToggle" type="button">&#9728; Light</button>
   </div>
 
   <div id="content">
@@ -57,5 +64,11 @@
   </div>
 
 </div>
+<script>
+  (function(){var b=document.getElementById('themeToggle'),h=document.documentElement;
+  function label(){b.innerHTML=h.classList.contains('dark')?'&#9728; Light':'&#9790; Dark';}
+  label();
+  b.onclick=function(){var d=h.classList.toggle('dark');try{localStorage.setItem('theme',d?'dark':'light')}catch(e){}label();};})();
+</script>
 </body>
 </html>
